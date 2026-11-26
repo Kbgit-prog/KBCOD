@@ -42,6 +42,9 @@ export const upsellSchema = z.object({
   discountType: z.enum(["none", "percentage", "fixed"]).default("none"),
   value: z.number().min(0).max(1_000_000_000).default(0),
   preselected: z.boolean().default(false),
+  /** Affichage uniquement (copié depuis Shopify à l'enregistrement) ; le serveur relit toujours le prix. */
+  displayPrice: z.number().int().min(0).nullable().default(null),
+  productTitle: shortText.default(""),
 });
 export type Upsell = z.infer<typeof upsellSchema>;
 
@@ -68,6 +71,8 @@ export const postPurchaseSchema = z.object({
   value: z.number().min(0).max(1_000_000_000).default(10),
   acceptText: shortText.default("Ajouter à ma commande"),
   declineText: shortText.default("Non merci"),
+  displayPrice: z.number().int().min(0).nullable().default(null),
+  productTitle: shortText.default(""),
 });
 export type PostPurchase = z.infer<typeof postPurchaseSchema>;
 
@@ -112,6 +117,4 @@ export interface PublicOffer<T extends OfferType = OfferType> {
   config: z.infer<(typeof offerConfigSchemas)[T]>;
 }
 
-export function appliesToProduct(ids: string[], productId: string): boolean {
-  return ids.length === 0 || ids.includes(productId);
-}
+export { appliesToProduct } from "./offer-utils";

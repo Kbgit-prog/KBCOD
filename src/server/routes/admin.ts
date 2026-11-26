@@ -88,6 +88,7 @@ async function republish(shop: ShopRow) {
 
 admin.get("/bootstrap", async (c) => {
   const shop = S(c);
+  await forms.ensureDefaultForm(shop.id);
   const [g] = await sql()`SELECT status, google_email, spreadsheet_title, sheet_title, enabled, last_error FROM google_connections WHERE shop_id = ${shop.id}`;
   const [alerts] = await sql()<{ sheets: number; meta: number; dead: number; uncertain: number }[]>`SELECT
     (SELECT count(*)::int FROM sheet_syncs WHERE shop_id = ${shop.id} AND status IN ('action_required','retrying')) AS sheets,

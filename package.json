@@ -16,7 +16,9 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "vitest run",
     "migrate": "tsx scripts/migrate.ts",
-    "schema:fetch": "bash scripts/fetch-admin-schema.sh"
+    "schema:fetch": "bash scripts/fetch-admin-schema.sh",
+    "test:e2e": "tsx tests/e2e/storefront.e2e.ts",
+    "seed:dev": "tsx scripts/seed-dev.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

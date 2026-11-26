@@ -7,7 +7,7 @@ import type {
   ShippingRate,
   Upsell,
 } from "./offers-schema";
-import { appliesToProduct } from "./offers-schema";
+import { appliesToProduct } from "./offer-utils";
 
 /** Montants en unités mineures (centimes) entières. */
 export interface CatalogVariant {
