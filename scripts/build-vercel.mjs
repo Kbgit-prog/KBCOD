@@ -35,7 +35,12 @@ writeFileSync(
         { src: "^/(health|webhooks|cron/jobs|google/callback)$", dest: "/api" },
         { src: "^/(api/admin|sf)/.*$", dest: "/api" },
         { handle: "filesystem" },
-        { src: "^/app(/.*)?$", dest: "/index.html", headers: { "Cache-Control": "no-store" } },
+        {
+          src: "^/app(/.*)?$",
+          dest: "/index.html",
+          // Application intégrée : seul l'admin Shopify peut l'afficher dans un iframe.
+          headers: { "Cache-Control": "no-store", "Content-Security-Policy": "frame-ancestors https://*.myshopify.com https://admin.shopify.com;" },
+        },
         { src: "^/$", status: 302, headers: { Location: "https://admin.shopify.com" } },
       ],
     },
