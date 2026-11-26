@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { sql } from "./db";
 import { env } from "./env";
 import { safeEqual, verifyToken } from "./lib/crypto";
 import { errMsg, log } from "./lib/log";
@@ -29,7 +30,18 @@ export function createApp(opts: { defer?: (p: Promise<unknown>) => void } = {}) 
     if (!opts.defer && pending.length) await Promise.all(pending);
   });
 
-  app.get("/health", (c) => c.json({ ok: true, service: "kb-cod-manager", time: new Date().toISOString() }));
+  app.get("/health", async (c) => {
+    let db: string | undefined;
+    if (c.req.query("db") === "1") {
+      try {
+        await sql()`SELECT 1 FROM shops LIMIT 1`;
+        db = "ok";
+      } catch (e) {
+        db = `erreur : ${errMsg(e).slice(0, 200)}`;
+      }
+    }
+    return c.json({ ok: db === undefined || db === "ok", service: "kb-cod-manager", time: new Date().toISOString(), db });
+  });
 
   app.route("/api/admin", admin);
   app.route("/sf", storefront);
