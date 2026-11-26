@@ -6,7 +6,7 @@ await build({
   bundle: true,
   minify: true,
   format: "iife",
-  target: ["es2019", "safari13"],
+  target: ["es2019", "safari14.1"],
   outfile: "extensions/kbcod-theme/assets/kbcod.js",
   legalComments: "none",
   charset: "ascii",

@@ -26,7 +26,7 @@ export const submitSchema = z.object({
       pageUrl: z.string().max(2000).nullable().default(null),
       referrer: z.string().max(2000).nullable().default(null),
     })
-    .default({}),
+    .prefault({}),
   /** Champ piège invisible : doit rester vide. */
   hp: z.string().max(200).default(""),
   /** Millisecondes écoulées entre l'affichage et l'envoi. */

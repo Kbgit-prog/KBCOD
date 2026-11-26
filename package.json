@@ -32,21 +32,25 @@
     "postgres": "^3.4.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "zod": "^3.25.76"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@hono/node-server": "^1.19.19",
+    "@hono/node-server": "^2.1.11",
     "@types/css-tree": "^2.3.11",
     "@types/node": "^22.20.7",
     "@types/react": "^18.3.32",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.7.0",
-    "esbuild": "^0.24.2",
+    "esbuild": "^0.28.2",
     "graphql": "^16.15.0",
-    "happy-dom": "^15.11.7",
+    "happy-dom": "^21.0.4",
     "tsx": "^4.23.15",
     "typescript": "^5.9.3",
     "vite": "^6.4.6",
-    "vitest": "^2.1.9"
+    "vitest": "^5.1.2"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "esbuild@0.25.12": true
   }
 }

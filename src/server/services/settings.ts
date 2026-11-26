@@ -26,7 +26,7 @@ export const fraudSettingsSchema = z.object({
   /** Délai minimal (ms) entre affichage et envoi ; plus rapide = robot probable. */
   minFillMs: z.number().int().min(0).max(60_000).default(2500),
   honeypot: z.boolean().default(true),
-  turnstile: z.object({ enabled: z.boolean().default(false), siteKey: z.string().max(200).default("") }).default({}),
+  turnstile: z.object({ enabled: z.boolean().default(false), siteKey: z.string().max(200).default("") }).prefault({}),
   /** Les commandes signalées reçoivent cette étiquette Shopify. */
   flagTag: z.string().max(40).default("KBCOD_A_VERIFIER"),
   /** Indicatifs autorisés (vide = tous), ex. ["225"]. */
@@ -60,9 +60,9 @@ export const providerSettingsSchema = z.object({
 });
 
 export const notificationSettingsSchema = z.object({
-  orderConfirmation: z.object({ enabled: z.boolean().default(false), channel: z.enum(["sms", "whatsapp"]).default("whatsapp"), template: z.string().max(1000).default("Bonjour {name}, votre commande {order_name} ({total}) est bien reçue. Nous vous appellerons pour confirmer la livraison.") }).default({}),
-  shipping: z.object({ enabled: z.boolean().default(false), channel: z.enum(["sms", "whatsapp"]).default("whatsapp"), template: z.string().max(1000).default("Bonjour {name}, votre commande {order_name} est en route.") }).default({}),
-  abandoned: z.object({ enabled: z.boolean().default(false), channel: z.enum(["sms", "whatsapp"]).default("whatsapp"), template: z.string().max(1000).default("Bonjour {name}, vous n'avez pas terminé votre commande sur {shop_name}. Répondez à ce message pour la finaliser.") }).default({}),
+  orderConfirmation: z.object({ enabled: z.boolean().default(false), channel: z.enum(["sms", "whatsapp"]).default("whatsapp"), template: z.string().max(1000).default("Bonjour {name}, votre commande {order_name} ({total}) est bien reçue. Nous vous appellerons pour confirmer la livraison.") }).prefault({}),
+  shipping: z.object({ enabled: z.boolean().default(false), channel: z.enum(["sms", "whatsapp"]).default("whatsapp"), template: z.string().max(1000).default("Bonjour {name}, votre commande {order_name} est en route.") }).prefault({}),
+  abandoned: z.object({ enabled: z.boolean().default(false), channel: z.enum(["sms", "whatsapp"]).default("whatsapp"), template: z.string().max(1000).default("Bonjour {name}, vous n'avez pas terminé votre commande sur {shop_name}. Répondez à ce message pour la finaliser.") }).prefault({}),
   /** Modèle WhatsApp approuvé (obligatoire hors fenêtre de 24 h). */
   whatsappTemplateName: z.string().max(100).default(""),
 });
@@ -104,13 +104,13 @@ export const trackingSettingsSchema = z.object({
 });
 
 export const shopSettingsSchema = z.object({
-  fraud: fraudSettingsSchema.default({}),
-  otp: otpSettingsSchema.default({}),
-  providers: providerSettingsSchema.default({}),
-  notifications: notificationSettingsSchema.default({}),
-  orders: orderSettingsSchema.default({}),
-  abandoned: abandonedSettingsSchema.default({}),
-  tracking: trackingSettingsSchema.default({}),
+  fraud: fraudSettingsSchema.prefault({}),
+  otp: otpSettingsSchema.prefault({}),
+  providers: providerSettingsSchema.prefault({}),
+  notifications: notificationSettingsSchema.prefault({}),
+  orders: orderSettingsSchema.prefault({}),
+  abandoned: abandonedSettingsSchema.prefault({}),
+  tracking: trackingSettingsSchema.prefault({}),
   dataRetentionDays: z.number().int().min(30).max(3650).default(365),
 });
 export type ShopSettings = z.infer<typeof shopSettingsSchema>;

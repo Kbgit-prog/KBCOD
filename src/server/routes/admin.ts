@@ -561,7 +561,7 @@ admin.post("/import", async (c) => {
       version: z.literal(1),
       forms: z.array(z.object({ name: z.string(), is_default: z.boolean(), active: z.boolean(), config: z.unknown(), products: z.array(z.object({ product_id: z.string(), product_title: z.string().nullable() })).default([]) })),
       offers: z.array(z.object({ type: z.enum(OFFER_TYPES), name: z.string(), active: z.boolean(), priority: z.number().default(0), config: z.unknown() })).default([]),
-      settings: z.record(z.unknown()).optional(),
+      settings: z.record(z.string(), z.unknown()).optional(),
     })
     .parse(await c.req.json());
   // Validation complète avant toute écriture.

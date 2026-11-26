@@ -1,8 +1,8 @@
 # Configuration de l'application Shopify (Shopify CLI : `shopify app deploy`).
 # Remplacez client_id et les URL par vos valeurs (voir docs/GUIDE_INSTALLATION.md).
-client_id = "REMPLACER_PAR_CLIENT_ID"
+client_id = "e930bd37bf563bd04ee390f5da5eb3e5"
 name = "KB COD Manager"
-application_url = "https://REMPLACER-PAR-VOTRE-DOMAINE.vercel.app/app/REMPLACER_PAR_CLIENT_ID"
+application_url = "https://kbcod-manager.vercel.app/app/e930bd37bf563bd04ee390f5da5eb3e5"
 embedded = true
 
 [build]
@@ -15,18 +15,18 @@ scopes = "read_products,read_inventory,read_orders,write_orders,read_customers,w
 use_legacy_install_flow = false
 
 [auth]
-redirect_urls = ["https://REMPLACER-PAR-VOTRE-DOMAINE.vercel.app/auth/callback"]
+redirect_urls = ["https://kbcod-manager.vercel.app/auth/callback"]
 
 [webhooks]
 api_version = "2026-10"
 
   [[webhooks.subscriptions]]
   topics = ["app/uninstalled", "orders/updated", "orders/paid", "fulfillments/create"]
-  uri = "https://REMPLACER-PAR-VOTRE-DOMAINE.vercel.app/webhooks"
+  uri = "https://kbcod-manager.vercel.app/webhooks"
 
   [[webhooks.subscriptions]]
   compliance_topics = ["customers/data_request", "customers/redact", "shop/redact"]
-  uri = "https://REMPLACER-PAR-VOTRE-DOMAINE.vercel.app/webhooks"
+  uri = "https://kbcod-manager.vercel.app/webhooks"
 
 [pos]
 embedded = false

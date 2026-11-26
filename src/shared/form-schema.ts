@@ -271,7 +271,7 @@ export const settingsSchema = z.object({
       text: shortText.default("Commander maintenant"),
       position: z.enum(["bottom", "top"]).default("bottom"),
     })
-    .default({}),
+    .prefault({}),
   countries: z.array(z.string().length(2)).max(250).default(["CI"]),
   defaultCountry: z.string().length(2).default("CI"),
   outOfStock: z.enum(["disable", "hide", "allow"]).default("disable"),
@@ -280,7 +280,7 @@ export const settingsSchema = z.object({
       type: z.enum(["message", "order_status", "url"]).default("message"),
       url: z.string().url().max(2000).or(z.literal("")).default(""),
     })
-    .default({}),
+    .prefault({}),
   autocomplete: z.boolean().default(true),
   /** Ouvre la popup de downsell quand le client ferme le formulaire. */
   downsellOnClose: z.boolean().default(true),
@@ -296,10 +296,10 @@ export const customCssSchema = z.object({
 
 export const formConfigSchema = z.object({
   schemaVersion: z.literal(1).default(1),
-  settings: settingsSchema.default({}),
-  design: designSchema.default({}),
-  messages: messagesSchema.default({}),
-  customCss: customCssSchema.default({}),
+  settings: settingsSchema.prefault({}),
+  design: designSchema.prefault({}),
+  messages: messagesSchema.prefault({}),
+  customCss: customCssSchema.prefault({}),
   elements: z.array(elementSchema).max(80),
 });
 export type FormConfig = z.infer<typeof formConfigSchema>;
