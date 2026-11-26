@@ -1,0 +1,15 @@
+{%- comment -%}
+  Intégration automatique KB COD Manager (App embed) :
+  active le formulaire (Popup ou Embedded selon la configuration), le bouton fixe et les pixels sur les pages produit.
+{%- endcomment -%}
+{%- if template.name == 'product' or request.page_type == 'product' -%}
+  {%- render 'kbcod-boot', product: product -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "KB COD Manager",
+  "target": "body",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,22 @@
+{%- comment -%}
+  Bloc d'application « Formulaire COD » : à placer dans la section produit (éditeur de thème).
+  Affiche le formulaire Embedded ou le bouton qui ouvre la Popup à cet emplacement précis.
+{%- endcomment -%}
+<div class="kbcod-block" style="margin: {{ block.settings.margin }}px 0;"></div>
+{%- render 'kbcod-boot', product: product -%}
+{%- if request.design_mode -%}
+  {%- unless app.metafields.kbcod.config.value -%}
+    <p style="padding:12px;border:1px dashed #999;border-radius:8px">KB COD Manager : ouvrez l'application une première fois pour publier la configuration.</p>
+  {%- endunless -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Formulaire COD",
+  "target": "section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "range", "id": "margin", "label": "Marge verticale", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 12 }
+  ]
+}
+{% endschema %}
